@@ -1,0 +1,63 @@
+﻿@model CgiQuiz.Models.Question
+@{
+    ViewData["Title"] = "Ass Question";
+}
+
+<h2>Add Question</h2>
+<div class="form-horizontal">
+    <form asp-controller="Admin" asp-action="Add" method="post">
+        ´@if (ViewBag.Message != null)
+        {
+            <div class="form-control">
+                <div class="col-md-10">@ViewBag.Message</div>
+            </div>
+        }
+        <div class="form-group">
+            <label asp-for="QuestionText" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="QuestionText" class="form-control" />
+                <span asp-validation-for="QuestionText" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AnswerA" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AnswerA" class="form-control" />
+                <span asp-validation-for="AnswerA" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AnswerB" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AnswerB" class="form-control" />
+                <span asp-validation-for="AnswerB" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AnswerC" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AnswerC" class="form-control" />
+                <span asp-validation-for="AnswerC" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AnswerD" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AnswerD" class="form-control" />
+                <span asp-validation-for="AnswerD" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CorrectAnswer" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CorrectAnswer" class="form-control" />
+                <span asp-validation-for="CorrectAnswer" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Add Question</button>
+            </div>
+        </div>
+    </form>
+</div>

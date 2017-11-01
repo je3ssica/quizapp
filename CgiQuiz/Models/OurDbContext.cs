@@ -13,5 +13,7 @@ namespace CgiQuiz.Models
 
         }
         public DbSet<UserAccount> userAccount { get; set; }
+        public DbSet<Question> questions { get; set; }
+
     }
 }
