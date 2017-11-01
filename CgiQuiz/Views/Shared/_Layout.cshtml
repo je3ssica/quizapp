@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CgiQuiz</title>
+    <title>@ViewData["Title"] - CGI Quiz</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -26,13 +27,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">CgiQuiz</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">RegistrationMVCCore</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    @if (Context.Session.GetString("UserID") != null)
+                    {
+                        <li><a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Home" asp-action="Register">Retgister</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Login">Login</a></li>
+                    }
+
                 </ul>
             </div>
         </div>
@@ -41,7 +52,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2017 - CgiQuiz</p>
+            <p>&copy; 2017 - CGI Sweden</p>
         </footer>
     </div>
 
