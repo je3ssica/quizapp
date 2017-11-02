@@ -72,7 +72,7 @@ namespace CgiQuiz.Controllers
             {
                 HttpContext.Session.SetString("UserID", account.UserID.ToString());
                 HttpContext.Session.SetString("Username", account.Username);
-                return RedirectToAction("Welcome");
+                return RedirectToAction("Welcome", "Admin");
             }
             else
             {
@@ -86,7 +86,7 @@ namespace CgiQuiz.Controllers
             if (HttpContext.Session.GetString("UserID") != null)
             {
                 ViewBag.Username = HttpContext.Session.GetString("Username");
-                return View();
+                return View(_context.questions.ToList());
             }
             else
             {

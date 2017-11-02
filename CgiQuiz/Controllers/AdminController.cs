@@ -18,7 +18,7 @@ namespace CgiQuiz.Controllers
         }
         public IActionResult Index()
         {
-            return View(_context.userAccount.ToList());
+            return View(_context.questions.ToList());
         }
 
         public IActionResult Error()
@@ -49,8 +49,7 @@ namespace CgiQuiz.Controllers
         {
             if (HttpContext.Session.GetString("UserID") != null)
             {
-                ViewBag.Username = HttpContext.Session.GetString("Username");
-                return View();
+                return View(_context.questions.ToList());
             }
             else
             {
