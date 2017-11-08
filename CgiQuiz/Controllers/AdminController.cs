@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CgiQuiz.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace CgiQuiz.Controllers
 {
@@ -45,6 +46,47 @@ namespace CgiQuiz.Controllers
             return View();
         }
 
+     //GET: Admin/Edit/id
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            var question = await _context.questions.AsNoTracking().SingleOrDefaultAsync(q => q.QuestionID == id);
+            if(question == null)
+            {
+                return NotFound();
+            }
+            return View(question);
+        }
+
+        //POST: Admin/Edit/id
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditQues(int QuestionID)
+        {
+            if (QuestionID == null)
+            { return NotFound(); }
+
+            var questionUpdate = await _context.questions.SingleOrDefaultAsync(q => q.QuestionID == QuestionID);
+
+            if(await TryUpdateModelAsync<Question>(questionUpdate, "", q=>q.QuestionText, q=>q.AnswerA, q=>q.AnswerB, q => q.AnswerC, q => q.AnswerD, q=>q.CorrectAnswer))
+            {
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. try again, and if the problem persists, see your system administrator");
+                }
+                return RedirectToAction("Welcome");
+            }
+            return View(questionUpdate);
+
+        }
+
         public ActionResult Welcome()
         {
             if (HttpContext.Session.GetString("UserID") != null)
@@ -60,7 +102,7 @@ namespace CgiQuiz.Controllers
         public ActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

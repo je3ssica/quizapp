@@ -19,6 +19,8 @@
                     <th>Answer C</th>
                     <th>Answer D</th>
                     <th>Correct Answer</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
 
                 </tr>
                 @foreach (var item in Model)
@@ -41,6 +43,12 @@
                         </td>
                         <td>
                             @item.CorrectAnswer
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.QuestionID">Edit</a>
+                        </td>
+                        <td>
+                            <a href="@item.QuestionID">Delete</a>
                         </td>
                     </tr>
                 }

@@ -81,23 +81,23 @@ namespace CgiQuiz.Controllers
             return View();
         }
 
-        public ActionResult Welcome()
-        {
-            if (HttpContext.Session.GetString("UserID") != null)
-            {
-                ViewBag.Username = HttpContext.Session.GetString("Username");
-                return View(_context.questions.ToList());
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
-        }
+        //public ActionResult Welcome()
+        //{
+        //    if (HttpContext.Session.GetString("UserID") != null)
+        //    {
+        //        ViewBag.Username = HttpContext.Session.GetString("Username");
+        //        return View(_context.questions.ToList());
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("Login");
+        //    }
+        //}
 
-        public ActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index");
-        }
+        //public ActionResult Logout()
+        //{
+        //    HttpContext.Session.Clear();
+        //    return RedirectToAction("Index");
+        //}
     }
 }
